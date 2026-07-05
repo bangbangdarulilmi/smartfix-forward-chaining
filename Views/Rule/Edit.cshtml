@@ -1,0 +1,78 @@
+﻿@model SMARTFIX.Models.Rule
+
+@{
+    ViewData["Title"] = "Edit Rule";
+}
+
+<div class="card">
+
+    <div class="card-header bg-warning">
+
+        Edit Basis Pengetahuan
+
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Edit">
+
+            <input asp-for="IdRule" type="hidden" />
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Gejala
+
+                </label>
+
+                <select asp-for="IdGejala"
+                        asp-items="ViewBag.Gejala"
+                        class="form-select">
+
+                </select>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Kerusakan
+
+                </label>
+
+                <select asp-for="IdKerusakan"
+                        asp-items="ViewBag.Kerusakan"
+                        class="form-select">
+
+                </select>
+
+            </div>
+
+            <div class="text-end">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Kembali
+
+                </a>
+
+                <button class="btn btn-warning">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                    Update
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,100 @@
+﻿@model SMARTFIX.Models.Kerusakan
+
+@{
+    ViewData["Title"] = "Edit Kerusakan";
+}
+
+<div class="card">
+
+    <div class="card-header bg-warning">
+
+        Edit Data Kerusakan
+
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Edit" method="post">
+
+            <input asp-for="IdKerusakan" type="hidden" />
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Kode Kerusakan
+
+                </label>
+
+                <input asp-for="KodeKerusakan"
+                       class="form-control" />
+
+                <span asp-validation-for="KodeKerusakan"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Nama Kerusakan
+
+                </label>
+
+                <input asp-for="NamaKerusakan"
+                       class="form-control" />
+
+                <span asp-validation-for="NamaKerusakan"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Solusi
+
+                </label>
+
+                <textarea asp-for="Solusi"
+                          rows="4"
+                          class="form-control"></textarea>
+
+            </div>
+
+            <div class="text-end">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Kembali
+
+                </a>
+
+                <button class="btn btn-warning">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                    Update
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

@@ -1,0 +1,384 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid">
+
+    <!-- Header -->
+
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-8">
+
+                    <h2 class="fw-bold text-primary mb-2">
+
+                        <i class="bi bi-cpu-fill me-2"></i>
+
+                        SMARTFIX
+
+                    </h2>
+
+                    <p class="text-muted mb-1 fs-5">
+
+                        Sistem Pakar Diagnosa Kerusakan Smartphone
+
+                    </p>
+
+                    <span class="badge bg-primary px-3 py-2">
+
+                        Metode Forward Chaining
+
+                    </span>
+
+                </div>
+
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+
+                    <div class="fs-5 fw-semibold">
+
+                        Selamat Datang,
+
+                    </div>
+
+                    <div class="fs-3 fw-bold text-primary">
+
+                        @ViewBag.Nama
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Statistik -->
+
+    <div class="row">
+
+                        <!-- Total Admin -->
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <div class="text-muted">
+
+                        Total Admin
+
+                    </div>
+
+                    <h2 class="fw-bold mb-0">
+
+                        @ViewBag.TotalAdmin
+
+                    </h2>
+
+                </div>
+
+                <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center"
+                     style="width:70px;height:70px;">
+
+                    <i class="bi bi-person-fill fs-2"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Total Gejala -->
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <div class="text-muted">
+
+                        Data Gejala
+
+                    </div>
+
+                    <h2 class="fw-bold mb-0">
+
+                        @ViewBag.TotalGejala
+
+                    </h2>
+
+                </div>
+
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                     style="width:70px;height:70px;">
+
+                    <i class="bi bi-list-check fs-2"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Total Kerusakan -->
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <div class="text-muted">
+
+                        Data Kerusakan
+
+                    </div>
+
+                    <h2 class="fw-bold mb-0">
+
+                        @ViewBag.TotalKerusakan
+
+                    </h2>
+
+                </div>
+
+                <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
+                     style="width:70px;height:70px;">
+
+                    <i class="bi bi-tools fs-2"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Total Rule -->
+
+    <div class="col-lg-3 col-md-6 mb-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <div class="text-muted">
+
+                        Basis Pengetahuan
+
+                    </div>
+
+                    <h2 class="fw-bold mb-0">
+
+                        @ViewBag.TotalRule
+
+                    </h2>
+
+                </div>
+
+                <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center"
+                     style="width:70px;height:70px;">
+
+                    <i class="bi bi-diagram-3-fill fs-2"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Total Riwayat -->
+
+    <div class="col-lg-12 mb-4">
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    <div class="text-muted">
+
+                        Total Riwayat Diagnosa
+
+                    </div>
+
+                    <h2 class="fw-bold mb-0">
+
+                        @ViewBag.TotalRiwayat
+
+                    </h2>
+
+                </div>
+
+                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center"
+                     style="width:70px;height:70px;">
+
+                    <i class="bi bi-clock-history fs-2"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+                    <!-- Informasi -->
+
+<div class="row">
+
+    <!-- Informasi Sistem -->
+
+    <div class="col-lg-8 mb-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-header bg-primary text-white">
+
+                <i class="bi bi-info-circle-fill me-2"></i>
+
+                Informasi Sistem
+
+            </div>
+
+            <div class="card-body">
+
+                <h4 class="fw-bold text-primary">
+
+                    SMARTFIX
+
+                </h4>
+
+                <p class="mb-3">
+
+                    SMARTFIX merupakan sistem pakar yang digunakan untuk
+                    membantu pengguna dalam mendiagnosa kerusakan smartphone
+                    berdasarkan gejala yang dipilih menggunakan metode
+                    <strong>Forward Chaining</strong>.
+
+                </p>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="border rounded p-3 mb-3">
+
+                            <i class="bi bi-cpu-fill text-primary me-2"></i>
+
+                            <strong>Metode</strong>
+
+                            <br />
+
+                            Forward Chaining
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="border rounded p-3 mb-3">
+
+                            <i class="bi bi-shield-check text-success me-2"></i>
+
+                            <strong>Status Sistem</strong>
+
+                            <br />
+
+                            Aktif
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Informasi Admin -->
+
+    <div class="col-lg-4 mb-4">
+
+        <div class="card border-0 shadow-sm h-100">
+
+            <div class="card-header bg-success text-white">
+
+                <i class="bi bi-person-circle me-2"></i>
+
+                Informasi Admin
+
+            </div>
+
+            <div class="card-body text-center">
+
+                <i class="bi bi-person-circle"
+                   style="font-size:80px;color:#0d6efd;"></i>
+
+                <h4 class="mt-3 fw-bold">
+
+                    @ViewBag.Nama
+
+                </h4>
+
+                <p class="text-muted">
+
+                    Administrator SMARTFIX
+
+                </p>
+
+                <hr />
+
+                <p class="mb-2">
+
+                    <i class="bi bi-calendar-event me-2"></i>
+
+                    @DateTime.Now.ToString("dddd, dd MMMM yyyy")
+
+                </p>
+
+                <p class="mb-0">
+
+                    <i class="bi bi-clock me-2"></i>
+
+                    @DateTime.Now.ToString("HH:mm")
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

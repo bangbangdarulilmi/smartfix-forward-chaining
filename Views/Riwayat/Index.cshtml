@@ -1,0 +1,175 @@
+﻿@model IEnumerable<SMARTFIX.Models.Diagnosa>
+
+@{
+    ViewData["Title"] = "Riwayat Diagnosa";
+}
+
+<div class="card">
+
+    <div class="card-body">
+
+        <!-- Toolbar -->
+
+        <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 mb-4">
+
+            <form asp-action="Index"
+                  method="get"
+                  class="d-flex align-items-center gap-2">
+
+                <input type="text"
+                       name="search"
+                       value="@ViewBag.Search"
+                       class="form-control"
+                       style="width:260px;"
+                       placeholder="Cari nama user..." />
+
+                <button class="btn btn-success">
+
+                    <i class="bi bi-search"></i>
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-clockwise"></i>
+
+                </a>
+
+            </form>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th style="width:60px;" class="text-center">
+                            No
+                        </th>
+
+                        <th style="width:170px;">
+                            Tanggal
+                        </th>
+
+                        <th style="width:170px;">
+                            User
+                        </th>
+
+                        <th style="width:120px;">
+                            Kode
+                        </th>
+
+                        <th>
+                            Kerusakan
+                        </th>
+
+                        <th style="width:120px;" class="text-center">
+                            Aksi
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+
+                        int no = 1;
+
+                    }
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+
+                            <td class="text-center">
+
+                                @no
+
+                            </td>
+
+                            <td>
+
+                                @item.TanggalDiagnosa.ToString("dd/MM/yyyy HH:mm")
+
+                            </td>
+
+                            <td>
+
+                                @item.NamaUser
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-primary">
+
+                                    @item.Kerusakan?.KodeKerusakan
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                @item.Kerusakan?.NamaKerusakan
+
+                            </td>
+
+                            <td>
+
+                                <div class="d-flex justify-content-center">
+
+                                    <a asp-action="Detail"
+                                       asp-route-id="@item.IdDiagnosa"
+                                       class="btn btn-info btn-sm">
+
+                                        <i class="bi bi-eye-fill"></i>
+
+                                    </a>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        no++;
+
+                    }
+
+                    @if (!Model.Any())
+                    {
+                        <tr>
+
+                            <td colspan="6" class="text-center py-4 text-muted">
+
+                                <i class="bi bi-inbox fs-2"></i>
+
+                                <br />
+
+                                Belum ada riwayat diagnosa.
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,159 @@
+﻿@model IEnumerable<SMARTFIX.Models.Rule>
+
+@{
+    ViewData["Title"] = "Basis Pengetahuan";
+}
+
+<div class="card">
+
+    <div class="card-body">
+
+        <!-- Toolbar -->
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+            <a asp-action="Create"
+               class="btn btn-primary">
+
+                <i class="bi bi-plus-circle me-2"></i>
+
+                Tambah Rule
+
+            </a>
+
+            <form asp-action="Index"
+                  method="get"
+                  class="d-flex gap-2">
+
+                <input type="text"
+                       name="search"
+                       value="@ViewBag.Search"
+                       class="form-control"
+                       style="width:250px"
+                       placeholder="Cari rule..." />
+
+                <button class="btn btn-success">
+
+                    <i class="bi bi-search"></i>
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-clockwise"></i>
+
+                </a>
+
+            </form>
+
+        </div>
+
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th style="width:60px;">No</th>
+
+                    <th style="width:110px;">Kode Gejala</th>
+
+                    <th>Nama Gejala</th>
+
+                    <th style="width:130px;">Kode Kerusakan</th>
+
+                    <th>Nama Kerusakan</th>
+
+                    <th style="width:170px;">Aksi</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @{
+                    int no = 1;
+                }
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+
+                        <td class="text-center">
+
+                            @no
+
+                        </td>
+
+                        <td>
+
+                            @item.Gejala?.KodeGejala
+
+                        </td>
+
+                        <td>
+
+                            @item.Gejala?.NamaGejala
+
+                        </td>
+
+                        <td>
+
+                            @item.Kerusakan?.KodeKerusakan
+
+                        </td>
+
+                        <td>
+
+                            @item.Kerusakan?.NamaKerusakan
+
+                        </td>
+
+                        <td>
+
+                            <div class="d-flex justify-content-center gap-2">
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.IdRule"
+                                   class="btn btn-warning btn-sm">
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                </a>
+
+                                <form asp-action="Delete"
+                                      asp-route-id="@item.IdRule"
+                                      method="post"
+                                      class="d-inline"
+                                      onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+
+                                    @Html.AntiForgeryToken()
+
+                                    <button class="btn btn-danger btn-sm">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    no++;
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

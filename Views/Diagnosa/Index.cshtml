@@ -1,0 +1,330 @@
+﻿@model IEnumerable<SMARTFIX.Models.Gejala>
+
+@{
+    ViewData["Title"] = "Diagnosa";
+}
+
+<div class="card">
+
+    <div class="card-body">
+
+        <!-- Toolbar -->
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div class="d-flex gap-3">
+
+                <div class="badge bg-primary fs-6 px-3 py-2">
+
+                    Total :
+                    <span id="totalGejala">
+                        @Model.Count()
+                    </span>
+
+                </div>
+
+                <div class="badge bg-success fs-6 px-3 py-2">
+
+                    Dipilih :
+                    <span id="jumlahDipilih">
+                        0
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="d-flex gap-2">
+
+                <button
+                    type="button"
+                    id="checkAll"
+                    class="btn btn-outline-primary">
+
+                    <i class="bi bi-check2-square me-1"></i>
+
+                    Pilih Semua
+
+                </button>
+
+                <button
+                    type="button"
+                    id="clearAll"
+                    class="btn btn-outline-danger">
+
+                    <i class="bi bi-x-circle me-1"></i>
+
+                    Hapus Pilihan
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- FORM -->
+
+        <form method="post">
+                    <!-- TABEL GEJALA -->
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-primary">
+
+                    <tr>
+
+                        <th width="80" class="text-center">
+
+                            Pilih
+
+                        </th>
+
+                        <th width="120">
+
+                            Kode
+
+                        </th>
+
+                        <th>
+
+                            Nama Gejala
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+
+                            <td class="text-center">
+
+                                <input
+                                    class="form-check-input gejala-check"
+                                    type="checkbox"
+                                    name="gejalaDipilih"
+                                    value="@item.IdGejala" />
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-primary">
+
+                                    @item.KodeGejala
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                @item.NamaGejala
+
+                            </td>
+
+                        </tr>
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="text-center mt-4">
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-lg px-5">
+
+                <i class="bi bi-search me-2"></i>
+
+                Proses Diagnosa
+
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</div>
+
+                                <!-- Modal Hasil Diagnosa -->
+
+<div class="modal fade"
+     id="hasilModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+
+        <div class="modal-content rounded-4 border-0 shadow">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title fw-bold">
+
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+
+                    Hasil Diagnosa
+
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                @if (ViewBag.Hasil != null)
+                {
+                    <i class="bi bi-phone-fill text-primary"
+                       style="font-size:70px;"></i>
+
+                    <h3 class="fw-bold mt-3">
+
+                        @ViewBag.Hasil.NamaKerusakan
+
+                    </h3>
+
+                    <span class="badge bg-primary fs-6">
+
+                        @ViewBag.Hasil.KodeKerusakan
+
+                    </span>
+
+                    <hr />
+
+                    <h5 class="text-start">
+
+                        <i class="bi bi-tools me-2"></i>
+
+                        Solusi
+
+                    </h5>
+
+                    <p class="text-start">
+
+                        @ViewBag.Hasil.Solusi
+
+                    </p>
+                }
+
+            </div>
+
+            <div class="modal-footer justify-content-center">
+
+                <a asp-action="Index"
+                   class="btn btn-primary">
+
+                    Diagnosa Lagi
+
+                </a>
+
+                <button class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                    Tutup
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+                    @section Scripts{
+
+<script>
+
+    const checkboxes = document.querySelectorAll('.gejala-check');
+
+    const jumlahDipilih = document.getElementById('jumlahDipilih');
+
+    const checkAll = document.getElementById('checkAll');
+
+    const clearAll = document.getElementById('clearAll');
+
+    function updateCounter(){
+
+        let total = 0;
+
+        checkboxes.forEach(c=>{
+
+            if(c.checked){
+
+                total++;
+
+            }
+
+        });
+
+        jumlahDipilih.innerText = total;
+
+    }
+
+    checkboxes.forEach(c=>{
+
+        c.addEventListener('change',updateCounter);
+
+    });
+
+    checkAll.addEventListener('click',()=>{
+
+        checkboxes.forEach(c=>{
+
+            c.checked=true;
+
+        });
+
+        updateCounter();
+
+    });
+
+    clearAll.addEventListener('click',()=>{
+
+        checkboxes.forEach(c=>{
+
+            c.checked=false;
+
+        });
+
+        updateCounter();
+
+    });
+
+    @if(ViewBag.Hasil != null)
+    {
+        <text>
+
+        document.addEventListener("DOMContentLoaded",function(){
+
+            var modal = new bootstrap.Modal(document.getElementById('hasilModal'));
+
+            modal.show();
+
+        });
+
+        </text>
+    }
+
+</script>
+
+}

@@ -1,0 +1,105 @@
+﻿@model SMARTFIX.Models.Admin
+
+@{
+    ViewData["Title"] = "Tambah Admin";
+}
+
+<div class="card">
+
+    <div class="card-header bg-primary text-white">
+
+        <i class="bi bi-person-plus-fill me-2"></i>
+
+        Tambah Admin
+
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Create" method="post">
+
+            <div class="mb-3">
+
+                <label asp-for="Username" class="form-label">
+
+                    Username
+
+                </label>
+
+                <input asp-for="Username"
+                       class="form-control"
+                       placeholder="Masukkan username..." />
+
+                <span asp-validation-for="Username"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label asp-for="Password"
+                       class="form-label">
+
+                    Password
+
+                </label>
+
+                <input asp-for="Password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Masukkan password..." />
+
+                <span asp-validation-for="Password"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="Nama"
+                       class="form-label">
+
+                    Nama Lengkap
+
+                </label>
+
+                <input asp-for="Nama"
+                       class="form-control"
+                       placeholder="Masukkan nama lengkap..." />
+
+                <span asp-validation-for="Nama"
+                      class="text-danger"></span>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                <i class="bi bi-save me-2"></i>
+
+                Simpan
+
+            </button>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                <i class="bi bi-arrow-left me-2"></i>
+
+                Kembali
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

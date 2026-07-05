@@ -1,0 +1,89 @@
+﻿@model SMARTFIX.Models.Gejala
+
+@{
+    ViewData["Title"] = "Tambah Gejala";
+}
+
+<div class="card mx-auto" style="max-width:700px;">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+
+            <i class="bi bi-plus-circle me-2"></i>
+
+            Tambah Data Gejala
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Create" method="post">
+
+            <div class="mb-3">
+
+                <label asp-for="KodeGejala" class="form-label fw-semibold">
+                    Kode Gejala
+                </label>
+
+                <input asp-for="KodeGejala"
+                       class="form-control"
+                       placeholder="Contoh : G001" />
+
+                <span asp-validation-for="KodeGejala"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label asp-for="NamaGejala" class="form-label fw-semibold">
+                    Nama Gejala
+                </label>
+
+                <input asp-for="NamaGejala"
+                       class="form-control"
+                       placeholder="Masukkan nama gejala" />
+
+                <span asp-validation-for="NamaGejala"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="text-end">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Kembali
+
+                </a>
+
+                <button type="submit"
+                        class="btn btn-primary">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Simpan
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

@@ -1,0 +1,885 @@
+﻿@model IEnumerable<SMARTFIX.Models.Gejala>
+
+@{
+    Layout = null;
+
+    var hasil = ViewBag.Hasil as SMARTFIX.Models.Kerusakan;
+}
+
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
+
+    <title>SMARTFIX - Diagnosa Smartphone</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet" />
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            background:#edf3f8;
+
+            font-family:'Segoe UI',sans-serif;
+
+        }
+
+        /* ================= HERO ================= */
+
+        .hero{
+
+            background:linear-gradient(135deg,#0d6efd,#4dabf7);
+
+            color:white;
+
+            text-align:center;
+
+            padding:70px 20px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+        }
+
+        .hero h1{
+
+            font-size:42px;
+
+            font-weight:700;
+
+            margin-bottom:10px;
+
+        }
+
+        .hero p{
+
+            font-size:18px;
+
+            opacity:.95;
+
+            margin-bottom:18px;
+
+        }
+
+        .method{
+
+            display:inline-block;
+
+            background:white;
+
+            color:#0d6efd;
+
+            padding:10px 24px;
+
+            border-radius:30px;
+
+            font-weight:600;
+
+        }
+
+        /* ================= CARD ================= */
+
+        .main-card{
+
+            max-width:1150px;
+
+            margin:-40px auto 40px;
+
+            border:none;
+
+            border-radius:22px;
+
+            box-shadow:0 20px 40px rgba(0,0,0,.12);
+
+        }
+
+        .card-body{
+
+            padding:35px;
+
+        }
+
+        /* ================= DASHBOARD ================= */
+
+        .dashboard-card{
+
+            border:none;
+
+            border-radius:18px;
+
+            color:white;
+
+            transition:.3s;
+
+        }
+
+        .dashboard-card:hover{
+
+            transform:translateY(-6px);
+
+            box-shadow:0 15px 30px rgba(0,0,0,.15);
+
+        }
+
+        .dashboard-card .card-body{
+
+            padding:25px;
+
+        }
+
+        .dashboard-card i{
+
+            font-size:40px;
+
+        }
+
+        .dashboard-card h2{
+
+            font-weight:700;
+
+            margin-top:12px;
+
+            margin-bottom:5px;
+
+        }
+
+        .dashboard-card small{
+
+            font-size:15px;
+
+        }
+
+        /* ================= TOOLBAR ================= */
+
+        .toolbar{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            flex-wrap:wrap;
+
+            gap:15px;
+
+            margin-bottom:25px;
+
+        }
+
+        .search-box{
+
+            position:relative;
+
+            width:330px;
+
+        }
+
+        .search-box input{
+
+            padding-left:45px;
+
+            border-radius:12px;
+
+            height:48px;
+
+        }
+
+        .search-box i{
+
+            position:absolute;
+
+            left:15px;
+
+            top:50%;
+
+            transform:translateY(-50%);
+
+            color:#6c757d;
+
+        }
+
+        .btn{
+
+            border-radius:10px;
+
+        }
+
+        /* ================= TABLE ================= */
+
+        .table thead{
+
+            vertical-align:middle;
+
+        }
+
+        .table tbody tr{
+
+            transition:.25s;
+
+        }
+
+        .table tbody tr:hover{
+
+            background:#eef7ff;
+
+        }
+
+        .table td{
+
+            vertical-align:middle;
+
+        }
+
+        .badge{
+
+            font-size:14px;
+
+            padding:8px 14px;
+
+        }
+
+        .form-check-input{
+
+            width:22px;
+
+            height:22px;
+
+            cursor:pointer;
+
+        }
+
+        .row-selected{
+
+            background:#dbeeff !important;
+
+        }
+
+        @@media(max-width:768px){
+
+            .search-box{
+
+                width:100%;
+
+            }
+
+            .hero h1{
+
+                font-size:30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <h1>
+
+            <i class="bi bi-phone-fill me-2"></i>
+
+            SMARTFIX
+
+        </h1>
+
+        <p>
+
+            Sistem Pakar Diagnosa Kerusakan Smartphone
+
+        </p>
+
+        <span class="method">
+
+            Metode Forward Chaining
+
+        </span>
+
+    </div>
+
+    <div class="container">
+
+        <div class="card main-card">
+
+            <div class="card-body">
+
+                <form method="post">
+
+                    <!-- ================= DASHBOARD ================= -->
+
+                    <div class="row mb-4">
+
+                        <div class="col-lg-4 mb-3">
+
+                            <div class="card dashboard-card bg-primary">
+
+                                <div class="card-body text-center">
+
+                                    <i class="bi bi-list-check"></i>
+
+                                    <h2 id="totalGejala">
+
+                                        @Model.Count()
+
+                                    </h2>
+
+                                    <small>Total Gejala</small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 mb-3">
+
+                            <div class="card dashboard-card bg-success">
+
+                                <div class="card-body text-center">
+
+                                    <i class="bi bi-check2-circle"></i>
+
+                                    <h2 id="jumlahDipilih">
+
+                                        0
+
+                                    </h2>
+
+                                    <small>Gejala Dipilih</small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 mb-3">
+
+                            <div class="card dashboard-card bg-warning">
+
+                                <div class="card-body text-center">
+
+                                    <i class="bi bi-bar-chart-fill"></i>
+
+                                    <h2 id="persentase">
+
+                                        0%
+
+                                    </h2>
+
+                                    <small>Progress Diagnosa</small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                                                    <!-- ================= TOOLBAR ================= -->
+
+                    <div class="toolbar">
+
+                        <div class="search-box">
+
+                            <i class="bi bi-search"></i>
+
+                            <input type="text"
+                                   id="searchGejala"
+                                   class="form-control"
+                                   placeholder="Cari gejala..." />
+
+                        </div>
+
+                        <div class="d-flex gap-2">
+
+                            <button type="button"
+                                    id="checkAll"
+                                    class="btn btn-outline-primary">
+
+                                <i class="bi bi-check2-square me-1"></i>
+
+                                Pilih Semua
+
+                            </button>
+
+                            <button type="button"
+                                    id="clearAll"
+                                    class="btn btn-outline-danger">
+
+                                <i class="bi bi-x-circle me-1"></i>
+
+                                Hapus
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= TABEL GEJALA ================= -->
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-header bg-primary text-white">
+
+                            <h5 class="mb-0">
+
+                                <i class="bi bi-list-check me-2"></i>
+
+                                Daftar Gejala Smartphone
+
+                            </h5>
+
+                        </div>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle mb-0"
+                                   id="tabelGejala">
+
+                                <thead class="table-light">
+
+                                    <tr>
+
+                                        <th width="80" class="text-center">
+
+                                            Pilih
+
+                                        </th>
+
+                                        <th width="120">
+
+                                            Kode
+
+                                        </th>
+
+                                        <th>
+
+                                            Nama Gejala
+
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach(var item in Model)
+                                    {
+
+                                        <tr class="gejala-row">
+
+                                            <td class="text-center">
+
+                                                <input
+                                                    class="form-check-input gejala-check"
+                                                    type="checkbox"
+                                                    name="gejalaDipilih"
+                                                    value="@item.IdGejala"/>
+
+                                            </td>
+
+                                            <td>
+
+                                                <span class="badge bg-primary rounded-pill">
+
+                                                    @item.KodeGejala
+
+                                                </span>
+
+                                            </td>
+
+                                            <td>
+
+                                                @item.NamaGejala
+
+                                            </td>
+
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ================= ALERT ================= -->
+
+                    @if(ViewBag.Pesan != null)
+                    {
+
+                        <div class="alert alert-warning mt-4">
+
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+                            @ViewBag.Pesan
+
+                        </div>
+
+                    }
+
+                    <!-- ================= BUTTON ================= -->
+
+                    <div class="text-center mt-4">
+
+                        <button type="submit"
+                                class="btn btn-primary btn-lg px-5">
+
+                            <i class="bi bi-search me-2"></i>
+
+                            Proses Diagnosa
+
+                        </button>
+
+                        <a asp-controller="Landing"
+                           asp-action="Index"
+                           class="btn btn-secondary btn-lg ms-2">
+
+                            <i class="bi bi-house-door me-2"></i>
+
+                            Beranda
+
+                        </a>
+
+                    </div>
+
+                    @if (hasil != null)
+{
+    <hr class="my-5" id="hasilDiagnosa" />
+
+    <div class="card border-0 shadow-lg">
+
+        <div class="card-header bg-success text-white py-3">
+
+            <h4 class="mb-0">
+
+                <i class="bi bi-patch-check-fill me-2"></i>
+
+                Hasil Diagnosa SMARTFIX
+
+            </h4>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="row g-4">
+
+                <!-- KODE -->
+
+                <div class="col-md-4">
+
+                    <div class="card border-primary h-100">
+
+                        <div class="card-body text-center">
+
+                            <small class="text-muted">
+
+                                Kode Kerusakan
+
+                            </small>
+
+                            <h3 class="mt-3">
+
+                                <span class="badge bg-primary px-4 py-2">
+
+                                    @hasil.KodeKerusakan
+
+                                </span>
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- NAMA -->
+
+                <div class="col-md-8">
+
+                    <div class="card border-success h-100">
+
+                        <div class="card-body">
+
+                            <small class="text-muted">
+
+                                Nama Kerusakan
+
+                            </small>
+
+                            <h4 class="fw-bold text-success mt-2">
+
+                                @hasil.NamaKerusakan
+
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- SOLUSI -->
+
+            <h5>
+
+                <i class="bi bi-lightbulb-fill text-warning me-2"></i>
+
+                Solusi Perbaikan
+
+            </h5>
+
+            <div class="alert alert-success mt-3">
+
+                @hasil.Solusi
+
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- PROGRESS -->
+
+            <h5>
+
+                <i class="bi bi-bar-chart-fill text-primary me-2"></i>
+
+                Tingkat Kecocokan
+
+            </h5>
+
+            @{
+                int persen = 85;
+            }
+
+            <div class="progress mt-3 mb-2"
+                 style="height:25px;">
+
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                     role="progressbar"
+                     style="width:@persen%">
+
+                    @persen%
+
+                </div>
+
+            </div>
+
+            <small class="text-muted">
+
+                Persentase menunjukkan tingkat kecocokan gejala terhadap rule kerusakan.
+
+            </small>
+
+            <div class="text-center mt-5">
+
+                <a asp-action="Diagnosa"
+                   class="btn btn-success btn-lg px-5">
+
+                    <i class="bi bi-arrow-repeat me-2"></i>
+
+                    Diagnosa Lagi
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+    // =============================
+    // CHECKBOX
+    // =============================
+
+    const checkboxes =
+        document.querySelectorAll(".gejala-check");
+
+    const jumlahDipilih =
+        document.getElementById("jumlahDipilih");
+
+    const persentase =
+        document.getElementById("persentase");
+
+    const total =
+        parseInt(document.getElementById("totalGejala").innerText);
+
+    function updateCounter(){
+
+        let pilih = 0;
+
+        checkboxes.forEach(c=>{
+
+            if(c.checked){
+
+                pilih++;
+
+                c.closest("tr")
+                 .classList.add("row-selected");
+
+            }
+            else{
+
+                c.closest("tr")
+                 .classList.remove("row-selected");
+
+            }
+
+        });
+
+        jumlahDipilih.innerText = pilih;
+
+        let persen =
+            Math.round((pilih / total) * 100);
+
+        persentase.innerText =
+            persen + "%";
+    }
+
+    // =============================
+    // EVENT CHECKBOX
+    // =============================
+
+    checkboxes.forEach(c=>{
+
+        c.addEventListener(
+            "change",
+            updateCounter
+        );
+
+    });
+
+    // =============================
+    // PILIH SEMUA
+    // =============================
+
+    document.getElementById("checkAll")
+        .addEventListener("click",function(){
+
+            checkboxes.forEach(c=>{
+
+                c.checked = true;
+
+            });
+
+            updateCounter();
+
+        });
+
+    // =============================
+    // HAPUS SEMUA
+    // =============================
+
+    document.getElementById("clearAll")
+        .addEventListener("click",function(){
+
+            checkboxes.forEach(c=>{
+
+                c.checked = false;
+
+            });
+
+            updateCounter();
+
+        });
+
+    // =============================
+    // SEARCH
+    // =============================
+
+    document.getElementById("searchGejala")
+        .addEventListener("keyup",function(){
+
+            let keyword =
+                this.value.toLowerCase();
+
+            document.querySelectorAll(
+       x         "#tabelGejala tbody tr"
+            ).forEach(row=>{
+
+                row.style.display =
+                    row.innerText
+                    .toLowerCase()
+                    .includes(keyword)
+                    ? ""
+                    : "none";
+
+            });
+
+        });
+
+    // =============================
+    // AUTO SCROLL HASIL
+    // =============================
+
+    window.onload = function(){
+
+        updateCounter();
+
+        var hasil =
+            document.getElementById(
+                "hasilDiagnosa"
+            );
+
+        if(hasil){
+
+            hasil.scrollIntoView({
+
+                behavior:"smooth"
+
+            });
+
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>

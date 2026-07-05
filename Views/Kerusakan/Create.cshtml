@@ -1,0 +1,101 @@
+﻿@model SMARTFIX.Models.Kerusakan
+
+@{
+    ViewData["Title"] = "Tambah Kerusakan";
+}
+
+<div class="card">
+
+    <div class="card-header bg-primary text-white">
+
+        Tambah Data Kerusakan
+
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="Create" method="post">
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Kode Kerusakan
+
+                </label>
+
+                <input asp-for="KodeKerusakan"
+                       class="form-control"
+                       placeholder="Contoh : K001" />
+
+                <span asp-validation-for="KodeKerusakan"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+
+                    Nama Kerusakan
+
+                </label>
+
+                <input asp-for="NamaKerusakan"
+                       class="form-control"
+                       placeholder="Masukkan nama kerusakan" />
+
+                <span asp-validation-for="NamaKerusakan"
+                      class="text-danger"></span>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+
+                    Solusi
+
+                </label>
+
+                <textarea asp-for="Solusi"
+                          rows="4"
+                          class="form-control"
+                          placeholder="Masukkan solusi kerusakan"></textarea>
+
+            </div>
+
+            <div class="text-end">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Kembali
+
+                </a>
+
+                <button class="btn btn-primary">
+
+                    <i class="bi bi-save"></i>
+
+                    Simpan
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
