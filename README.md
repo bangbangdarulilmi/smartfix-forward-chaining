@@ -13,15 +13,15 @@ Project **SMARTFIX** dikembangkan oleh **Kelompok 8** sebagai implementasi Siste
 
 # 🎓 Informasi Akademik
 
-**Mata Kuliah** : Kecerdasan Buatan
+**Mata Kuliah**    : Kecerdasan Buatan
 
-**Jenis Tugas** : Ujian Akhir Semester (UAS)
+**Jenis Tugas**    : Ujian Akhir Semester (UAS)
 
-**Program Studi** : Informatika
+**Program Studi**  : Informatika
 
-**Universitas** : Sekolah Tinggi Teknologi Cipasung
+**Universitas**    : Sekolah Tinggi Teknologi Cipasung
 
-**Tahun** : 2026
+**Tahun**          : 2026
 
 
 # 📄 Lisensi
